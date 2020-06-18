@@ -24,8 +24,8 @@ def play_round(dealer, player, _min=1, _max=10):
     dealer.deal_to_player(player, 2)
 
     # Loop until the player completes their turn
-    choice = 0
-    while player.score() < 21 and choice != 1:
+    choice = '0'
+    while player.score() < 21 and choice != '1':
 
         # Display cards
         display(dealer, player, dealer_hidden=True)
@@ -35,9 +35,9 @@ def play_round(dealer, player, _min=1, _max=10):
         print('[1] Stay || [2] Hit\n')
 
         # Collect player input
-        choice = int(input())
+        choice = input()
 
-        if choice == 2:
+        if choice == '2':
             dealer.deal_to_player(player, 1)
 
     # Loop until the dealer completes their turn
