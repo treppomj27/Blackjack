@@ -5,11 +5,11 @@ from card import Card
 
 
 class Deck:
-    def __init__(self, _ranks, _suits, _values):
+    def __init__(self, ranks, suits, values):
         self.cards = []
-        for i in range(0, len(_ranks)):
-            for j in range(0, len(_suits)):
-                self.cards.append(Card(_ranks[i], _suits[j], _values[i]))
+        for i in range(0, len(ranks)):
+            for j in range(0, len(suits)):
+                self.cards.append(Card(ranks[i], suits[j], values[i]))
 
     def print(self):
         string = ' '

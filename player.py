@@ -1,10 +1,9 @@
 
-
 class Player:
-    def __init__(self, _name, _balance):
-        self.name = _name
+    def __init__(self, name, balance):
+        self.name = name
         self.hand = []
-        self.balance = _balance
+        self.balance = balance
         self.bet = 0
 
     # noinspection DuplicatedCode
