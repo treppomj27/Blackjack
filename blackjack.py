@@ -2,21 +2,19 @@
 import os
 
 
-def play_round(dealer, player, _min=1, _max=10):
+def play_round(dealer, player, min_bet=10, max_bet=100):
 
     # Show the player their balance and prompt the player for their bet
-    os.system('clear')
-    print('Betting Rules: Min =', _min, '|| Max =', _max)
-    display_separator()
-    print(player.name, '|| Balance = $' + str(player.balance))
-    display_separator()
-    print('Enter your bet:')
-    first_pass = True
-    while not (_min <= int(player.bet) <= _max):
-        if not first_pass:
-            print('Invalid bet!')
-        player.bet = int(input())
-        first_pass = False
+    while not (min_bet <= int(player.bet) <= max_bet):
+        os.system('clear')
+        print('Betting Rules: Min =', min_bet, '|| Max =', max_bet)
+        display_separator()
+        print(player.name, '|| Balance = $' + str(player.balance))
+        display_separator()
+        try:
+            player.bet = int(input('Enter your bet:\n'))
+        except ValueError:
+            player.bet = 0
     player.balance -= player.bet
 
     # Deal initial hands
@@ -56,7 +54,7 @@ def play_round(dealer, player, _min=1, _max=10):
     elif dealer.score() > 21:
         outcome = 1
         print('Dealer busted!\n')
-    elif player.score() > dealer.score() and player.score() == 21 and len(player.hand):
+    elif player.score() > dealer.score() and player.score() == 21 and len(player.hand) == 2:
         outcome = 1
         print('Blackjack! Player wins!\n')
     elif player.score() > dealer.score():
@@ -83,6 +81,9 @@ def play_round(dealer, player, _min=1, _max=10):
     # Send cards to the trash pile
     trash_player_hand(dealer, player)
     trash_dealer_hand(dealer)
+
+    # Wait for player to continue
+    input('Press ENTER to continue:\n')
 
 
 def display_separator(n=50):
