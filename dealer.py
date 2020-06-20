@@ -1,7 +1,7 @@
 
 class Dealer:
-    def __init__(self, _deck):
-        self.deck = _deck
+    def __init__(self, deck):
+        self.deck = deck
         self.hand = []
         self.trash = []
 
@@ -26,12 +26,12 @@ class Dealer:
             aces -= 1
         return total_value
 
-    def deal_to_self(self, _n):
-        for i in range(0, _n):
+    def deal_to_self(self, n):
+        for i in range(0, n):
             self.hand.append(self.deck.cards[0])
             del self.deck.cards[0]
 
-    def deal_to_player(self, _player, _n):
-        for i in range(0, _n):
-            _player.hand.append(self.deck.cards[0])
+    def deal_to_player(self, player, n):
+        for i in range(0, n):
+            player.hand.append(self.deck.cards[0])
             del self.deck.cards[0]

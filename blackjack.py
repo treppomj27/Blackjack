@@ -23,6 +23,8 @@ def play_round(dealer, player, min_bet=10, max_bet=100):
 
     # Loop until the player completes their turn
     choice = '0'
+    option_to_hit = True
+    option_to_double_down = True
     while player.score() < 21 and choice != '1':
 
         # Display cards
@@ -30,13 +32,25 @@ def play_round(dealer, player, min_bet=10, max_bet=100):
 
         # Display player options
         print('Select an option below:')
-        print('[1] Stay || [2] Hit\n')
+        string = '[1] Stay'
+        if option_to_hit:
+            string += ' || [2] Hit'
+        if option_to_double_down:
+            string += ' || [3] Double Down'
+        print(string)
 
         # Collect player input
         choice = input()
 
         if choice == '2':
             dealer.deal_to_player(player, 1)
+
+        if choice == '3' and option_to_double_down:
+            dealer.deal_to_player(player, 1)
+            player.balance -= player.bet
+            player.bet *= 2
+            option_to_hit = False
+            option_to_double_down = False
 
     # Loop until the dealer completes their turn
     while dealer.score() < 17 and player.score() <= 21:
@@ -83,6 +97,7 @@ def play_round(dealer, player, min_bet=10, max_bet=100):
     trash_dealer_hand(dealer)
 
     # Wait for player to continue
+    print('Number of Cards in the Trash =', len(dealer.trash))
     input('Press ENTER to continue:\n')
 
 
